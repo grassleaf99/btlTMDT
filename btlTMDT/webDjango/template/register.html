@@ -3,6 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+
+    <!--position: relative am chi vi tri binh thuong cua element, tu do co the su dung left, right, top, bottom de can chinh vi tri cua element-->
+    <style>
+        body {
+            background-color: orange;
+        }
+
+        form {
+            margin-top: 10%;
+            margin-left: 30%;
+            margin-right: 30%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background-color: green;
+            color: yellow;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+        }
+
+        .sign-up-btn {
+            margin-left: 40%;
+            margin-right: 40%;
+            cursor: pointer;
+            color: white;
+            background-color: blue;
+        }
+
+        .sign-up-btn:hover {
+            color: blue;
+            background-color: white;
+        }
+
+        section {
+            display: grid;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
     <form action="/register/" method="post">
@@ -15,14 +55,16 @@
                 </tr>
             {% endfor %}
         </table>
-        <input type="submit" value="Sign up">
+        <input class="sign-up-btn" type="submit" value="Sign up">
     </form>
-    <div>
-        {% for message in messages %}
-            <h3> {{message}} </h3>
-        {% endfor %}
-    </div>
-    <!--<p>{{cu.errors}}</p> cai nay danh cho form tao boi django.contrib.auth.forms.UserCreationForm voi class Meta: model = User cua django.contrib.auth.models -->
-    <p>Already have an account? <a href="/login/">Log in</a></p>
+    <section>
+        <div>
+            {% for message in messages %}
+                <h3> {{message}} </h3>
+            {% endfor %}
+        </div>
+        <!--<p>{{cu.errors}}</p> cai nay danh cho form tao boi django.contrib.auth.forms.UserCreationForm voi class Meta: model = User cua django.contrib.auth.models -->
+        <p>Already have an account? <a href="/login/" style="text-decoration: none">Log in</a></p>
+    </section>
 </body>
 </html>

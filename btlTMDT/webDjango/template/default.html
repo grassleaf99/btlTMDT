@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>Home</title>
+  <title>Default</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -28,9 +28,6 @@
   <link rel="stylesheet" href="{% static 'homepage/css/responsive.css' %}">
   <!-- Scrollbar Custom CSS -->
   <link rel="stylesheet" href="{% static 'homepage/css/jquery.mCustomScrollbar.min.css' %}">
-
-    <!--css danh sach vegetable-->
-    <link rel="stylesheet" href="{% static 'store/css/list_vegetable.css' %}">
 
   <!-- Tweaks for older IEs-->
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -64,12 +61,8 @@
                 <div class="limit-box">
                   <nav class="main-menu ">
                     <ul class="menu-area-main">
-                      <li class="active"> <a href="/home/">Home</a> </li>
-                        <li> <a href="#list-vegetable-section">Goods</a> </li>
-                        <li> <a href="{% url 'name_cart' %}">Cart</a> </li>
+                      <li class="active"> <a href="#">Home</a> </li>
                       <li> <a href="#about">About</a> </li>
-                      <li> <a href="#vegetable">Vegetable</a> </li>
-                      <li> <a href="#testimonial">Testomonial</a> </li>
                       <li> <a href="#contact">Contact Us</a> </li>
                         <li> <a href="/logout/">Log out</a> </li>
                      <li> <a href="#"><img src="{% static 'homepage/icon/icon_b.png' %}" alt="#" /></a></li>
@@ -193,86 +186,7 @@
 </div>
 </header>
 
-      <!-- loader  -->
-  <div class="loader_bg">
-    <div class="loader"><img src="{% static 'homepage/images/loading.gif' %}" alt="#" /></div>
-  </div>
-  <!-- end loader -->
 
-    <!-- load danh sach rau cu-->
-    <section id="list-vegetable-section">
-        <h1 class="head-list-vegetable">ALL VEGETABLES:</h1>
-        <!--su dung row va column cua bootstrap-->
-        <div class="row">
-            <!-- tao 3 column 1 row -->
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/broccoli.jpg' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Broccoli</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 2$</h4>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/cabbage.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Cabbage</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 6$</h4>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/carrot.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Carrot</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 3$</h4>
-                </div>
-            </div>
-        </div>
-
-        <!--su dung row va column cua bootstrap-->
-        <div class="row">
-            <!-- tao 3 column 1 row -->
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/kohlrabi.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Kohlrabi</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 1$</h4>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/potato.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Potato</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 5$</h4>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/tomato.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Tomato</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 4$</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end load danh sach rau cu -->
 
 <!-- about  -->
 <div id="about" class="about">
@@ -295,150 +209,6 @@
   </div>
 </div>
 <!-- end abouts -->
-
-<!-- vegetable -->
-<div id="vegetable" class="vegetable">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div  class="titlepage">
-          <h2> Fresh <strong class="llow">vegetable</strong> </h2>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 ">
-        <div class="vegetable_shop">
-          <h3>Best Vegetables Shop</h3>
-          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages andIt is a long established fact that a reader will be distracted </p>
-        </div>
-      </div>
-       <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 ">
-        <div class="vegetable_img">
-         <figure><img src="{% static 'homepage/images/v1.jpg' %}" alt="#"/></figure>
-         <span>01</span>
-        </div>
-      </div>
-       <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 ">
-        <div class="vegetable_img margin_top">
-         <figure><img src="images/v2.jpg" alt="#"/></figure>
-         <span>02</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end vegetable -->
-
-   <!-- clients -->
-    <div id="testimonial" class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>testimonial</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clients_red">
-        <div class="container">
-            <div id="testimonial_slider" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#testimonial_slider" data-slide-to="0" class=""></li>
-                    <li data-target="#testimonial_slider" data-slide-to="1" class="active"></li>
-                    <li data-target="#testimonial_slider" data-slide-to="2" class=""></li>
-                </ul>
-                <!-- The slideshow -->
-                <div class="carousel-inner">
-                    <div class="carousel-item">
-                        <div class="testomonial_section">
-
-                            <div class="full testimonial_cont">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 pa_right">
-                                        <div class="testomonial_img">
-                                            <figure><img src="{% static 'homepage/images/tes.jpg' %}" alt="#"/></figure>
-                                            <i><img src="{% static 'homepage/images/test_con.png' %}" alt="#"/></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 pa_left">
-                                        <div class="cross_inner">
-                                            <h3>Jomono<br><strong class="ornage_color">review</strong></h3>
-                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and
-
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item active">
-
-                        <div class="testomonial_section">
-                            <div class="full center">
-                            </div>
-                            <div class="full testimonial_cont ">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 pa_right">
-                                        <div class="testomonial_img">
-                                            <figure><img src="{% static 'homepage/images/tes.jpg' %}" alt="#"/></figure>
-                                            <i><img src="{% static 'homepage/images/test_con.png' %}" alt="#"/></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 pa_left">
-                                        <div class="cross_inner">
-                                            <h3>Jomono<br><strong class="ornage_color">review</strong></h3>
-                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and
-
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="carousel-item">
-
-                        <div id="testomonial" class="testomonial_section">
-                            <div class="full center">
-                            </div>
-                            <div class="full testimonial_cont ">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 pa_right">
-                                        <div class="testomonial_img">
-                                            <figure><img src="{% static 'homepage/images/tes.jpg' %}" alt="#"/></figure>
-                                            <i><img src="{% static 'homepage/images/test_con.png' %}" alt="#"/></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 pa_left">
-                                        <div class="cross_inner">
-                                            <h3>Jomono<br><strong class="ornage_color">review</strong></h3>
-                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and
-
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- end clients -->
 
 <!-- contact -->
 <div id="contact" class="contact">

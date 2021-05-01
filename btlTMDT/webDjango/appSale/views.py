@@ -74,6 +74,17 @@ class HomeAfterLoginView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'home.html')
 
+class ViewCart(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request):
+        return render(request, 'cart.html')
+
+class ViewCheckout(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request):
+        return render(request, 'checkout.html')
 
 class Logout(LoginRequiredMixin, View):
     login_url = '/login/'
