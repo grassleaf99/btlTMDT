@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import Customer
+from .models import *
 
 # Create your views here.
 class HomeView(View):
@@ -72,19 +72,29 @@ class HomeAfterLoginView(LoginRequiredMixin, View):
     login_url = '/login/'
 
     def get(self, request):
-        return render(request, 'home.html')
+        items = Item.objects.all()
+        context = {'items':items}
+        return render(request, 'home.html', context)
 
 class ViewCart(LoginRequiredMixin, View):
     login_url = '/login/'
 
     def get(self, request):
-        return render(request, 'cart.html')
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        itemcarts = order.cart.itemcart_set.all()
+        context = {'itemcarts':itemcarts, 'order':order}
+        return render(request, 'cart.html', context)
 
 class ViewCheckout(LoginRequiredMixin, View):
     login_url = '/login/'
 
     def get(self, request):
-        return render(request, 'checkout.html')
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        itemcarts = order.cart.itemcart_set.all()
+        context = {'itemcarts': itemcarts, 'order': order, 'customer':customer}
+        return render(request, 'checkout.html', context)
 
 class Logout(LoginRequiredMixin, View):
     login_url = '/login/'

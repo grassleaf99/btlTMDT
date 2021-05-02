@@ -202,74 +202,20 @@
     <!-- load danh sach rau cu-->
     <section id="list-vegetable-section">
         <h1 class="head-list-vegetable">ALL VEGETABLES:</h1>
-        <!--su dung row va column cua bootstrap-->
+        <!--su dung row va column cua bootstrap co ten class la row, col-lg-4, cac class co tu btn cung la cua bootstrap-->
         <div class="row">
-            <!-- tao 3 column 1 row -->
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/broccoli.jpg' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Broccoli</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 2$</h4>
+            {% for item in items %}
+                <div class="col-lg-4">
+                    <img class="not-bootstrap-thumbnail" src="{{item.image.url}}" >
+                    <div class="not-bootstrap-box-element" >
+                        <h6><strong>{{item.name}}</strong></h6>
+                        <hr>
+                        <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+                        <a class="btn btn-outline-success" href="#">View</a>
+                        <h4 style="display: inline-block; float: right;"><strong>${{item.price|floatformat:2}}</strong></h4>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/cabbage.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Cabbage</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 6$</h4>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/carrot.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Carrot</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 3$</h4>
-                </div>
-            </div>
-        </div>
-
-        <!--su dung row va column cua bootstrap-->
-        <div class="row">
-            <!-- tao 3 column 1 row -->
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/kohlrabi.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Kohlrabi</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 1$</h4>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/potato.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Potato</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 5$</h4>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="{% static 'store/images/tomato.jfif' %}" class="thumbnail">
-                <div class="not-bootstrap">
-                    <h6><strong>Tomato</strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right;"> 4$</h4>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
     <!-- end load danh sach rau cu -->

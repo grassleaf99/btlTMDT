@@ -92,10 +92,10 @@
                 <form id="form">
                     <div id="user-info">
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="name" placeholder="Your name">
+                            <input class="form-control" type="text" name="name" placeholder="Your name" value="{{request.user.first_name}}">
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="phone" placeholder="Your phone number">
+                            <input class="form-control" type="text" name="phone" placeholder="Your phone number" value="{{customer.phone}}">
                         </div>
                     </div>
                     <div id="shipping-info">
@@ -103,7 +103,7 @@
                         <p>Shipping Information:</p>
                         <hr>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="address" placeholder="Your address">
+                            <input class="form-control" type="text" name="address" placeholder="Your address" value="{{customer.address}}">
                         </div>
                         <div class="not-bootstrap-form-field">
                             <input class="form-control" type="text" name="payment" placeholder="Your payment">
@@ -124,14 +124,16 @@
                 <hr>
                 <h3>Order Summary</h3>
                 <hr>
-                <div class="not-bootstrap-cart-row">
-                    <div style="flex:2"><img style="width:6.25em;" src="{% static 'store/images/tomato.jfif' %}"></div>
-                    <div style="flex:2"><p>Tomato</p></div>
-                    <div style="flex:1"><p>$20</p></div>
-                    <div style="flex:1"><p>x2</p></div>
-                </div>
-                <h5>Items:  2</h5>
-                <h5>Totals: $40</h5>
+                {% for itemcart in itemcarts %}
+                    <div class="not-bootstrap-cart-row">
+                        <div style="flex:2"><img style="width:6.25em;" src="{{itemcart.item.image.url}}"></div>
+                        <div style="flex:2"><p>{{itemcart.item.name}}</p></div>
+                        <div style="flex:1"><p>${{itemcart.item.price|floatformat:2}}</p></div>
+                        <div style="flex:1"><p>x{{itemcart.quantity}}</p></div>
+                    </div>
+                {% endfor %}
+                <h4><strong>Items:  {{order.get_cart_quantity}}</strong></h4>
+                <h4><strong>Totals: ${{order.get_cart_price|floatformat:2}}</strong></h4>
             </div>
         </div>
     </div>

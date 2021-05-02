@@ -92,8 +92,8 @@
                 <br>
                 <table class="table">
                     <tr>
-                        <th><h5>Items: <strong>11</strong></h5></th>
-                        <th><h5>Totals: <strong>21$</strong></h5></th>
+                        <th><h5>Items: <strong>{{order.get_cart_quantity}}</strong></h5></th>
+                        <th><h5>Totals: <strong>${{order.get_cart_price|floatformat:2}}</strong></h5></th>
                         <th>
                             <a style="float:right; margin:0.3125em" class="btn btn-success" href="{% url 'name_checkout' %}">Checkout</a>
                         </th>
@@ -112,7 +112,23 @@
                     <div style="flex:1;"><strong>Total</strong></div>
                 </div>
 
-                <div class="not-boostrap-cart-row">
+                {% for itemcart in itemcarts %}
+                    <div class="not-boostrap-cart-row">
+                        <div style="flex:2;"><img style="width:6.25em" src="{{itemcart.item.image.url}}"></div>
+                        <div style="flex:2;"><strong>{{itemcart.item.name}}</strong></div>
+                        <div style="flex:1;"><strong>${{itemcart.item.price|floatformat:2}}</strong></div>
+                        <div style="flex:1;">
+                            <p class="not-boostrap-quantity">{{itemcart.quantity}}</p>
+                            <div class="not-boostrap-quantity">
+                                <img class="not-boostrap-chg-quantity" src="{% static 'cart/images/arrow-up.png' %}">
+                                <img class="not-boostrap-chg-quantity" src="{% static 'cart/images/arrow-down.png' %}">
+                            </div>
+                        </div>
+                        <div style="flex:1;"><strong>${{itemcart.get_itemcart_price|floatformat:2}}</strong></div>
+                    </div>
+                {% endfor %}
+
+                <!--<div class="not-boostrap-cart-row">
                     <div style="flex:2;"><img style="width:6.25em" src="{% static 'store/images/tomato.jfif' %}"></div>
                     <div style="flex:2;"><strong>Tomato</strong></div>
                     <div style="flex:1;"><strong>4$</strong></div>
@@ -124,7 +140,7 @@
                         </div>
                     </div>
                     <div style="flex:1;"><strong>Total</strong></div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

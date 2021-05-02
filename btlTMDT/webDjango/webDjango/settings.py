@@ -124,3 +124,7 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'ten thu muc trong STATIC_ROOT')
     os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_URL = '/media/'
+# nhung buc anh duoc upload len cho item se duoc luu o thu muc MEDIA_ROOT
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
