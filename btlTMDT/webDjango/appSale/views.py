@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import *
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 class HomeView(View):
@@ -103,6 +105,30 @@ class Logout(LoginRequiredMixin, View):
         logout(request)
         return redirect('index')
 
+def updateItem(request):
+    data = json.loads(request.body)
+    itemId = data['itemId']
+    action = data['action']
+    print('Action: ', action)
+    print('itemId: ', itemId)
+
+    customer = request.user.customer
+    item = Item.objects.get(id=itemId)
+    order, orderCreated = Order.objects.get_or_create(customer=customer, complete=False)
+    cart, cartCreated = Cart.objects.get_or_create(order=order)
+    itemcart, itemcartCreated = ItemCart.objects.get_or_create(cart=cart, item=item) # dung get_or_create de kiem tra xem itemcart da ton tai chua, tranh viec tao lai itemcart
+
+    if action == 'add':
+        itemcart.quantity = itemcart.quantity + 1
+    elif action == 'remove':
+        itemcart.quantity = itemcart.quantity - 1
+
+    itemcart.save()
+
+    if itemcart.quantity <= 0:
+        itemcart.delete() # xoa itemcart khoi cart
+
+    return JsonResponse('Item was added', safe=False)
 
 def bua(request):
     return render(request, 'homepage/base.html')
