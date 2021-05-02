@@ -1,4 +1,5 @@
 var updateBtns = document.getElementsByClassName("myjs-update-cart")
+var h5 = document.querySelector('h5')
 for(var i = 0; i < updateBtns.length; i++)
 {
     updateBtns[i].addEventListener('click', function(){
@@ -19,6 +20,9 @@ for(var i = 0; i < updateBtns.length; i++)
                 console.log('User is logged in, sending data...')
             }
         */
+
+        h5.classList.remove('success-update-cart')
+        h5.classList.add('success-update-cart')
     })
 }
 
