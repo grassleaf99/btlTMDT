@@ -31,7 +31,10 @@ class Order(models.Model):
     def get_cart_quantity(self):
         itemcarts = self.cart.itemcart_set.all()
         cartQuantity = sum([itemcart.quantity for itemcart in itemcarts])
-        return cartQuantity
+        if cartQuantity != 0:
+            return cartQuantity
+        else:
+            return 0
 
 class Item(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)

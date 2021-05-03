@@ -26,22 +26,4 @@
     box-shadow: -0.0625em -0.1875em 0.3125em -0.125em rgba(214, 214, 214, 1);
 }
 
-h5 {
-    color: white;
-    margin-right: 40%;
-    margin-left: 40%;
-}
 
-@keyframes backgroundchange {
-    0% {background-color: darkolivegreen;}
-    50% {background-color: lime;}
-    100% {background-color: white;}
-}
-
-h5.success-update-cart{
-    color: white;
-    margin-right: 40%;
-    margin-left: 40%;
-    animation-name: backgroundchange;
-    animation-duration: 2.5s;
-}

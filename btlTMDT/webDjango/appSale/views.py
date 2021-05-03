@@ -74,8 +74,10 @@ class HomeAfterLoginView(LoginRequiredMixin, View):
     login_url = '/login/'
 
     def get(self, request):
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = Item.objects.all()
-        context = {'items':items}
+        context = {'items':items, 'order':order}
         return render(request, 'home.html', context)
 
 class ViewCart(LoginRequiredMixin, View):

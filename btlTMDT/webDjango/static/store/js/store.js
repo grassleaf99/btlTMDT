@@ -1,5 +1,4 @@
 var updateBtns = document.getElementsByClassName("myjs-update-cart")
-var h5 = document.querySelector('h5')
 for(var i = 0; i < updateBtns.length; i++)
 {
     updateBtns[i].addEventListener('click', function(){
@@ -8,6 +7,7 @@ for(var i = 0; i < updateBtns.length; i++)
         console.log('itemId: ', itemId, '. Action: ', action)
 
         console.log('User: ', user)
+
         updateCart(itemId, action)
         /*
             // nhung dong trong comment nay dung de kiem tra co ton tai user ko (tuc user da dang nhap chua)
@@ -20,9 +20,6 @@ for(var i = 0; i < updateBtns.length; i++)
                 console.log('User is logged in, sending data...')
             }
         */
-
-        h5.classList.remove('success-update-cart')
-        h5.classList.add('success-update-cart')
     })
 }
 
@@ -46,5 +43,6 @@ function updateCart(itemId, action)
 
     .then((data) =>{
         console.log('data: ', data)
+        location.reload()
     })
 }
