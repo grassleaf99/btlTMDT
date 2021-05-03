@@ -43,6 +43,7 @@ function updateCart(itemId, action)
 
     .then((data) =>{
         console.log('data: ', data)
+        alert('Update cart successfully')
         location.reload()
     })
 }

@@ -76,6 +76,7 @@ class HomeAfterLoginView(LoginRequiredMixin, View):
     def get(self, request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cart, cartCreated = Cart.objects.get_or_create(order=order) # kiem tra order co cart ko, neu ko thi tao cart de order co the dung property get_cart_quantity
         items = Item.objects.all()
         context = {'items':items, 'order':order}
         return render(request, 'home.html', context)
@@ -86,7 +87,8 @@ class ViewCart(LoginRequiredMixin, View):
     def get(self, request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        itemcarts = order.cart.itemcart_set.all()
+        cart, cartCreated = Cart.objects.get_or_create(order=order)
+        itemcarts = cart.itemcart_set.all()
         context = {'itemcarts':itemcarts, 'order':order}
         return render(request, 'cart.html', context)
 
@@ -96,7 +98,8 @@ class ViewCheckout(LoginRequiredMixin, View):
     def get(self, request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        itemcarts = order.cart.itemcart_set.all()
+        cart, cartCreated = Cart.objects.get_or_create(order=order)
+        itemcarts = cart.itemcart_set.all()
         context = {'itemcarts': itemcarts, 'order': order, 'customer':customer}
         return render(request, 'checkout.html', context)
 
@@ -130,7 +133,7 @@ def updateItem(request):
     if itemcart.quantity <= 0:
         itemcart.delete() # xoa itemcart khoi cart
 
-    return JsonResponse('Item was added', safe=False)
+    return JsonResponse('Cart was updated', safe=False)
 
 def bua(request):
     return render(request, 'homepage/base.html')
