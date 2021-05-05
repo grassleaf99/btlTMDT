@@ -92,7 +92,10 @@
                 <form id="form">
                     <div id="user-info">
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="name" placeholder="Your name" value="{{request.user.first_name}}">
+                            <input class="form-control" type="text" name="name" placeholder="Your first name" value="{{request.user.first_name}}">
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="name" placeholder="Your last name" value="{{request.user.last_name}}">
                         </div>
                         <div class="not-bootstrap-form-field">
                             <input class="form-control" type="text" name="phone" placeholder="Your phone number" value="{{customer.phone}}">
@@ -105,9 +108,9 @@
                         <div class="not-bootstrap-form-field">
                             <input class="form-control" type="text" name="address" placeholder="Your address" value="{{customer.address}}">
                         </div>
-                        <div class="not-bootstrap-form-field">
+                        <!--<div class="not-bootstrap-form-field">
                             <input class="form-control" type="text" name="payment" placeholder="Your payment">
-                        </div>
+                        </div>-->
                         <div class="not-bootstrap-form-field">
                             <input class="form-control" type="text" name="shipment" placeholder="Your shipment">
                         </div>
