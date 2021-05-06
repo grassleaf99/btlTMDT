@@ -103,6 +103,19 @@ class ViewCheckout(LoginRequiredMixin, View):
         context = {'itemcarts': itemcarts, 'order': order, 'customer':customer}
         return render(request, 'checkout.html', context)
 
+class ViewPayment(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def post(self, request):
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+        # luu thong tin order
+
+
+        context = {'order': order}
+        return render(request, 'payment.html', context)
+
 class Logout(LoginRequiredMixin, View):
     login_url = '/login/'
 
