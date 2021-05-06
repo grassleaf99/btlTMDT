@@ -110,8 +110,7 @@ class ViewPayment(LoginRequiredMixin, View):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-        # luu thong tin order
-
+        # cap nhat thong tin order, phai thanh toan xong thi moi order thanh cong
 
         context = {'order': order}
         return render(request, 'payment.html', context)
