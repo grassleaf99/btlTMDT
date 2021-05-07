@@ -7,9 +7,9 @@ urlpatterns = [
     path('home/', views.HomeAfterLoginView.as_view(), name='name_home'),
     path('cart/', views.ViewCart.as_view(), name='name_cart'),
     path('checkout/', views.ViewCheckout.as_view(), name='name_checkout'),
-    path('payment/', views.ViewPayment.as_view(), name='name_payment'),
     path('logout/', views.Logout.as_view(), name='name_out'),
     path('updateItem/', views.updateItem, name='name_updateitem'),
+    path('processOrder/', views.processOrder, name='name_processOder'),
     path('bua/', views.bua, name='bua'),
 ]
 

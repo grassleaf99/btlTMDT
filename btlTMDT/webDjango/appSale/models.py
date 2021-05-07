@@ -16,7 +16,7 @@ class Employee(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True) # khi xoa customer thi truong customer se duoc set thanh NULL
-    date_order = models.DateTimeField(auto_now_add=True)
+    date_order = models.DateTimeField(auto_now=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
     # shipment = models.ForeignKey(Shipment, on_delete=models.SET_NULL, blank=True, null=True)
     # payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
@@ -44,17 +44,17 @@ class Item(models.Model):
         return self.name
 
 class Cart(models.Model):
-    order = models.OneToOneField(Order, on_delete=models.CASCADE, null=True, blank=True) # code xong nen de null = False, blank=False
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return str(self.id) + '_' + 'order' + str(self.order.id)
 
 class ItemCart(models.Model):
-    item = models.OneToOneField(Item, on_delete=models.CASCADE, null=False, blank=False)
+    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=False, blank=False)
     quantity = models.IntegerField(default=0)
     date_added = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return str(self.id) + '_' + self.item.name + '_' + str(self.quantity)
+        return str(self.id) + '_cart' + str(self.cart.id) + '_' + self.item.name + '_' + str(self.quantity)
     @property
     def get_itemcart_price(self):
         itemcartPrice = self.item.price * self.quantity

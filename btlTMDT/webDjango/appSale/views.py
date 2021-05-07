@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 from django.http import JsonResponse
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 class HomeView(View):
@@ -103,18 +104,6 @@ class ViewCheckout(LoginRequiredMixin, View):
         context = {'itemcarts': itemcarts, 'order': order, 'customer':customer}
         return render(request, 'checkout.html', context)
 
-class ViewPayment(LoginRequiredMixin, View):
-    login_url = '/login/'
-
-    def post(self, request):
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-
-        # cap nhat thong tin order, phai thanh toan xong thi moi order thanh cong
-
-        context = {'order': order}
-        return render(request, 'payment.html', context)
-
 class Logout(LoginRequiredMixin, View):
     login_url = '/login/'
 
@@ -146,6 +135,30 @@ def updateItem(request):
         itemcart.delete() # xoa itemcart khoi cart
 
     return JsonResponse('Cart was updated', safe=False)
+
+@csrf_exempt # ko can csrf van post du lieu duoc
+def processOrder(request):
+    print('JSON: ', request.body)
+    dataJSON = json.loads(request.body)
+    totalPrice = float(dataJSON['totalPrice'])
+    first_name = dataJSON['my-first-name']
+    last_name = dataJSON['my-last-name']
+    phone = dataJSON['my-phone-number']
+    address = dataJSON['my-address']
+    shipment = dataJSON['my-shipment']
+    print(first_name)
+    print(last_name)
+    print(phone)
+    print(address)
+    print(shipment)
+    print(totalPrice)
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    if totalPrice == order.get_cart_price:
+        # order.complete = True
+        # order.save()
+        print('Order successfully')
+    return JsonResponse('Order completed', safe=False)
 
 def bua(request):
     return render(request, 'homepage/base.html')
