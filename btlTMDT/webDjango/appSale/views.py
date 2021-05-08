@@ -154,9 +154,9 @@ def processOrder(request):
     print(totalPrice)
     customer = request.user.customer
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
-    if totalPrice == order.get_cart_price:
-        # order.complete = True
-        # order.save()
+    if totalPrice == order.get_cart_price:  # kiem tra user co gian lan bang cach thay doi tong tien cua cart ko
+        order.complete = True
+        order.save()
         print('Order successfully')
     return JsonResponse('Order completed', safe=False)
 
