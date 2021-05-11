@@ -145,12 +145,10 @@ def processOrder(request):
     last_name = dataJSON['my-last-name']
     phone = dataJSON['my-phone-number']
     address = dataJSON['my-address']
-    shipment = dataJSON['my-shipment']
     print(first_name)
     print(last_name)
     print(phone)
     print(address)
-    print(shipment)
     print(totalPrice)
     customer = request.user.customer
     order, created = Order.objects.get_or_create(customer=customer, complete=False)

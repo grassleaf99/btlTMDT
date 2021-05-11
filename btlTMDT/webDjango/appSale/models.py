@@ -18,8 +18,6 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True) # khi xoa customer thi truong customer se duoc set thanh NULL
     date_order = models.DateTimeField(auto_now=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
-    # shipment = models.ForeignKey(Shipment, on_delete=models.SET_NULL, blank=True, null=True)
-    # payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
     def __str__(self):
         return str(self.id) + '_' + self.customer.user.first_name
     @property
@@ -59,7 +57,3 @@ class ItemCart(models.Model):
     def get_itemcart_price(self):
         itemcartPrice = self.item.price * self.quantity
         return itemcartPrice
-
-# class Shipment(models.Model):
-
-# class Payment(models.Model):
