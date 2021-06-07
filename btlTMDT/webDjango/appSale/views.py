@@ -86,10 +86,10 @@ class HomeAfterLoginView(LoginRequiredMixin, View):
         customer = request.user.customer
         order, orderCreated = Order.objects.get_or_create(customer=customer, complete=False)
         cart, cartCreated = Cart.objects.get_or_create(order=order) # kiem tra order co cart ko, neu ko thi tao cart de order co the dung property get_cart_quantity
-        #categorys = Category.objects.all()
-        items = Item.objects.all()
-        #context = {'categorys':categorys, 'cart':cart}
-        context = {'items':items, 'cart':cart}
+        categories = Category.objects.all()
+        #items = Item.objects.all()
+        context = {'categories':categories, 'cart':cart}
+        #context = {'items':items, 'cart':cart}
         return render(request, 'home.html', context)
 
 class ViewCart(LoginRequiredMixin, View):

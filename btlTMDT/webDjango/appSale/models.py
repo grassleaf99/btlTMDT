@@ -91,7 +91,13 @@ class Item(models.Model):
     image = models.ImageField(null=True, blank=True)
     def __str__(self):
         return self.name
-
+    @property
+    def imgUrl(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 class Cart(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, null=True, blank=True)
