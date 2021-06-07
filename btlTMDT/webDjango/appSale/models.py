@@ -68,7 +68,7 @@ class Order(models.Model):
     def __str__(self):
         if self.customer == None:
             return str(self.id)
-        return str(self.id) + '_' + self.customer.user.first_name
+        return str(self.id) + '_' + self.customer.fullname.firstName
     @property
     def shipPrice(self):
         return 1.0
