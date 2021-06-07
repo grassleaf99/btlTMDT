@@ -122,7 +122,7 @@
                 <div class="row">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                     <div class="text-bg">
-                     <span>Welcome {{request.user.first_name}} to Shree</span>
+                     <span>Welcome {{request.user.username}} to Shree</span>
                       <h1>Vegetables Shop</h1>
                       <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal </p>
                       <form class="Vegetable">
@@ -149,7 +149,7 @@
                 <div class="row">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                     <div class="text-bg">
-                      <span>Welcome {{request.user.first_name}} to Shree</span>
+                      <span>Welcome {{request.user.username}} to Shree</span>
                       <h1>Vegetables Shop</h1>
                       <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal </p>
                       <form class="Vegetable">
@@ -179,7 +179,7 @@
                 <div class="row">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                     <div class="text-bg">
-                      <span>Welcome {{request.user.first_name}} to Shree</span>
+                      <span>Welcome {{request.user.username}} to Shree</span>
                       <h1>Vegetables Shop</h1>
                       <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal </p>
                        <form class="Vegetable">
@@ -225,8 +225,32 @@
     <section id="list-vegetable-section">
         <h1 class="head-list-vegetable">ALL VEGETABLES:</h1>
         <hr>
-        <h4 style="margin-right: 40%; margin-left: 40%;"><strong>Cart quantity: {{order.get_cart_quantity}}</strong></h4>
+        <h2 style="margin-right: 40%; margin-left: 40%;"><strong>Cart quantity: {{cart.get_cart_quantity}}</strong></h2>
         <hr>
+        <!--
+        {% if categorys %}
+            {% for category in categorys %}
+                <h4 class="w-25 mx-auto my-2">{{category.name}}</h4>
+                {% if category.item_set.all %}
+                    <div class="row">
+                        {% for item in category.item_set.all %}
+                            <div class="col-lg-4">
+                                <img class="not-bootstrap-thumbnail" src="{{item.image.url}}" >
+                                <div class="not-bootstrap-box-element" >
+                                    <h6><strong>{{item.name}}</strong></h6>
+                                    <hr>
+                                    <button data-item="{{item.id}}" data-action="add" class="btn btn-outline-secondary add-btn myjs-update-cart">Add to Cart</button>
+                                    <a class="btn btn-outline-success" href="#">View</a>
+                                    <h4 style="display: inline-block; float: right;"><strong>${{item.price|floatformat:2}}</strong></h4>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <hr>
+            {% endfor %}
+        {% endif %}
+        -->
         <!--su dung row va column cua bootstrap co ten class la row, col-lg-4, cac class co tu btn cung la cua bootstrap-->
         <div class="row">
             {% for item in items %}

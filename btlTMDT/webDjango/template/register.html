@@ -1,10 +1,8 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-
-    <!--position: relative am chi vi tri binh thuong cua element, tu do co the su dung left, right, top, bottom de can chinh vi tri cua element-->
     <style>
         body {
             background-color: orange;
@@ -75,8 +73,77 @@
                 <h3> {{message}} </h3>
             {% endfor %}
         </div>
-        <!--<p>{{cu.errors}}</p> cai nay danh cho form tao boi django.contrib.auth.forms.UserCreationForm voi class Meta: model = User cua django.contrib.auth.models -->
+
         <p>Already have an account? <a href="/login/" style="text-decoration: none">Log in</a></p>
     </section>
 </body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--adding css bootstrap cdn-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Register</title>
+</head>
+<body class="bg-info">
+    <div class="container my-2">
+        <form action="/register/" method="post" class="needs-validation bg-light py-2" novalidate>
+            {% csrf_token %}
+            {% for field in cu %}
+                <div class="row my-2">
+                    <label class="col-2 col-form-label text-center">{{field.label}}</label>
+                    <div class="col mx-2">
+                        {{field}}
+                        <div class="valid-feedback">
+                          Valid data!
+                        </div>
+                        <div class="invalid-feedback">
+                          Invalid data!
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="container w-25 mx-auto my-2">
+                <input class="btn btn-primary" type="submit" value="Sign up">
+            </div>
+        </form>
+        <section>
+            <div class="w-50 mx-auto">
+                {% for message in messages %}
+                    <h3> {{message}} </h3>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+    <!--<p>{{cu.errors}}</p> cai nay danh cho form tao boi django.contrib.auth.forms.UserCreationForm voi class Meta: model = User cua django.contrib.auth.models -->
+    <p class="w-25 mx-auto my-2">Already have an account? <a href="/login/" style="text-decoration: none; color: khaki;">Log in</a></p>
+
+    <!--adding js bundle bootstrap cdn-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+          'use strict'
+
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.querySelectorAll('.needs-validation')
+
+          // Loop over them and prevent submission
+          Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+              form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                  event.preventDefault()
+                  event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+              }, false)
+            })
+        })()
+    </script>
+</body>
 </html>
+

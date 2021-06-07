@@ -114,8 +114,8 @@
                 <br>
                 <table class="table">
                     <tr>
-                        <th><h4>Items: <strong>{{order.get_cart_quantity}}</strong></h4></th>
-                        <th><h4>Totals: <strong>${{order.get_cart_price|floatformat:2}}</strong></h4></th>
+                        <th><h4>Items: <strong>{{cart.get_cart_quantity}}</strong></h4></th>
+                        <th><h4>Totals: <strong>${{cart.get_cart_price|floatformat:2}}</strong></h4></th>
                         <th>
                             <a style="float:right; margin:0.3125em" class="btn btn-success" href="{% url 'name_checkout' %}">Checkout</a>
                         </th>
@@ -149,20 +149,6 @@
                         <div style="flex:1;"><strong>${{itemcart.get_itemcart_price|floatformat:2}}</strong></div>
                     </div>
                 {% endfor %}
-
-                <!--<div class="not-boostrap-cart-row">
-                    <div style="flex:2;"><img style="width:6.25em" src="{% static 'store/images/tomato.jfif' %}"></div>
-                    <div style="flex:2;"><strong>Tomato</strong></div>
-                    <div style="flex:1;"><strong>4$</strong></div>
-                    <div style="flex:1;">
-                        <p class="not-boostrap-quantity">2</p>
-                        <div class="not-boostrap-quantity">
-                            <img class="not-boostrap-chg-quantity" src="{% static 'cart/images/arrow-up.png' %}">
-                            <img class="not-boostrap-chg-quantity" src="{% static 'cart/images/arrow-down.png' %}">
-                        </div>
-                    </div>
-                    <div style="flex:1;"><strong>Total</strong></div>
-                </div>-->
             </div>
         </div>
     </div>

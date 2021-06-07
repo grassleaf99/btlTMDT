@@ -118,10 +118,13 @@
                         <p>Customer name:</p>
                         <hr>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-first-name" placeholder="Your first name" value="{{request.user.first_name}}" required disabled>
+                            <input class="form-control" type="text" name="my-first-name" placeholder="Your first name" value="{{customer.fullname.firstName}}" required disabled>
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-last-name" placeholder="Your last name" value="{{request.user.last_name}}" required disabled>
+                            <input class="form-control" type="text" name="my-mid-name" placeholder="Your middle name" value="{{customer.fullname.midName}}" required disabled>
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-last-name" placeholder="Your last name" value="{{customer.fullname.lastName}}" required disabled>
                         </div>
                     </div>
                     <hr>
@@ -130,10 +133,19 @@
                         <p>Shipping Information:</p>
                         <hr>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-phone-number" placeholder="Your phone number" value="{{customer.phone}}" required disabled>
+                            <input class="form-control" type="text" name="my-city" placeholder="Your city" value="{{customer.address.city}}" required disabled>
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-address" placeholder="Your address" value="{{customer.address}}" required disabled>
+                            <input class="form-control" type="text" name="my-district" placeholder="Your district" value="{{customer.address.district}}" required disabled>
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-street" placeholder="Your street" value="{{customer.address.street}}" required disabled>
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-house-number" placeholder="Your house number" value="{{customer.address.houseNum}}" required disabled>
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-phone" placeholder="Your phone number" value="{{customer.phone}}" required disabled>
                         </div>
                     </div>
                     <hr>
@@ -162,8 +174,11 @@
                         <div style="flex:1"><p>x{{itemcart.quantity}}</p></div>
                     </div>
                 {% endfor %}
-                <h4><strong>Items:  {{order.get_cart_quantity}}</strong></h4>
-                <h4><strong>Totals: ${{order.get_cart_price|floatformat:2}}</strong></h4>
+                <h4><strong>Cart quantity:  {{cart.get_cart_quantity}}</strong></h4>
+                <h4><strong>Prices of all items: ${{cart.get_cart_price|floatformat:2}}</strong></h4>
+                <h4><strong>Ship price: ${{order.shipPrice|floatformat:2}}</strong></h4>
+                <hr>
+                <h2>Totals: ${{order.totalOrderPrice|floatformat:2}}</h2>
             </div>
         </div>
     </div>
@@ -297,7 +312,7 @@ function initMap() {
 <!--https://developer.paypal.com/docs/archive/checkout/how-to/customize-button/#button-styles-->
 <script>
     // Render the PayPal button into #paypal-button-container
-    var totalPrice = '{{order.get_cart_price}}'
+    var totalPrice = '{{order.totalOrderPrice}}'
     paypal.Buttons({
 
         style:{
@@ -342,9 +357,13 @@ function initMap() {
         var formData = {
             'totalPrice':totalPrice,
             'my-first-name':document.querySelector('input[name=my-first-name]').value,
+            'my-mid-name': document.querySelector('input[name=my-mid-name]').value,
             'my-last-name':document.querySelector('input[name=my-last-name]').value,
-            'my-phone-number':document.querySelector('input[name=my-phone-number]').value,
-            'my-address':document.querySelector('input[name=my-address]').value,
+            'my-city': document.querySelector('input[name=my-city]'),
+            'my-district': document.querySelector('input[name=my-district]'),
+            'my-street': document.querySelector('input[name=my-street]'),
+            'my-house-number': document.querySelector('input[name=my-house-number]'),
+            'my-phone':document.querySelector('input[name=my-phone]').value
         }
 
         var url = '/processOrder/'
