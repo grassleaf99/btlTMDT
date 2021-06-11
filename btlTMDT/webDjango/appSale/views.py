@@ -70,9 +70,13 @@ class Login(View):
         #user_name = request.POST.get('un')
         pass_word = request.POST['pass']
         #pass_word = request.POST.get('pass')
-        customer_user = authenticate(username=user_name, password=pass_word)
-        if customer_user is not None:
-            login(request, customer_user)
+        user = authenticate(username=user_name, password=pass_word)
+        if user is not None:
+            login(request, user)
+            if Employee.objects.filter(user=user).exists():
+                employee = Employee.objects.get(user=user)
+                if SaleStaff.objects.filter(employee=employee).exists():
+                    return redirect('')
             return redirect('name_home')
         else:
             messages.info(request, 'Invalid credentials')
@@ -148,6 +152,9 @@ def updateItem(request):
 
 @csrf_exempt # ko can csrf van post du lieu duoc
 def processOrder(request):
+    customer = request.user.customer
+    fullname = customer.fullname
+    address = customer.address
     print('JSON: ', request.body)
     dataJSON = json.loads(request.body)
     totalPrice = float(dataJSON['totalPrice'])
@@ -159,6 +166,7 @@ def processOrder(request):
     street = dataJSON['my-street']
     houseNum = dataJSON['my-house-number']
     phone = dataJSON['my-phone']
+    pay = dataJSON['type_pay']
     print(first_name)
     print(mid_name)
     print(last_name)
@@ -168,13 +176,90 @@ def processOrder(request):
     print(houseNum)
     print(phone)
     print(totalPrice)
-    customer = request.user.customer
+    print(pay)
+    if fullname.firstName != first_name:
+        fullname.firstName = first_name
+        fullname.save()
+    if fullname.midName != mid_name:
+        fullname.midName = mid_name
+        fullname.save()
+    if fullname.lastName != last_name:
+        fullname.lastName = last_name
+        fullname.save()
+    if address.city != city:
+        address.city = city
+        address.save()
+    if address.district != district:
+        address.district = district
+        address.save()
+    if address.street != street:
+        address.street = street
+        address.save()
+    if address.houseNum != houseNum:
+        address.houseNum = houseNum
+        address.save()
+    if customer.phone != phone:
+        customer.phone = phone
+        customer.save()
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     if totalPrice == order.totalOrderPrice:  # kiem tra user co gian lan bang cach thay doi tong tien cua cart ko
         order.complete = True
+        paypal = Payment.objects.get(name='CreditCard')
+        order.payment = paypal
         order.save()
         print('Order successfully')
         return JsonResponse('Order completed', safe=False)
+
+def processNhan(request):
+    customer = request.user.customer
+    fullname = customer.fullname
+    address = customer.address
+    first_name = request.POST['my-first-name']
+    mid_name = request.POST['my-mid-name']
+    last_name = request.POST['my-last-name']
+    city = request.POST['my-city']
+    district = request.POST['my-district']
+    street = request.POST['my-street']
+    houseNum = request.POST['my-house-number']
+    phone = request.POST['my-phone']
+    if fullname.firstName != first_name:
+        fullname.firstName = first_name
+        fullname.save()
+    if fullname.midName != mid_name:
+        fullname.midName = mid_name
+        fullname.save()
+    if fullname.lastName != last_name:
+        fullname.lastName = last_name
+        fullname.save()
+    if address.city != city:
+        address.city = city
+        address.save()
+    if address.district != district:
+        address.district = district
+        address.save()
+    if address.street != street:
+        address.street = street
+        address.save()
+    if address.houseNum != houseNum:
+        address.houseNum = houseNum
+        address.save()
+    if customer.phone != phone:
+        customer.phone = phone
+        customer.save()
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    order.complete = True
+    payNhan = Payment.objects.get(name='Receive')
+    order.payment = payNhan
+    order.save()
+    print('Order successfully')
+    return redirect('name_home')
+
+class ViewAllOrders(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request):
+        if request.user.employee.salestaff:
+            pass
 
 def bua(request):
     return render(request, 'homepage/base.html')

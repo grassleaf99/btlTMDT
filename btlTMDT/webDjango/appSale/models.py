@@ -57,18 +57,29 @@ class BusinessStaff(models.Model):
 
 class SaleStaff(models.Model):
     employee = models.OneToOneField(Employee, on_delete=models.CASCADE, null=False, blank=False)
+    saleCounter = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return self.employee.user.username
 
 
+class Payment(models.Model):
+    name = models.CharField(max_length=255, null=False, blank=False)
+    desc = models.CharField(max_length=255, null=False, blank=False)
+    def __str__(self):
+        return self.name
+
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True) # khi xoa customer thi truong customer se duoc set thanh NULL
+    saleStaff = models.ForeignKey(SaleStaff, on_delete=models.SET_NULL, blank=True, null=True)
+    payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
     date_order = models.DateTimeField(auto_now=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
+    confirmOrder = models.BooleanField(default=False, null=True, blank=True)
     def __str__(self):
         if self.customer == None:
             return str(self.id)
-        return str(self.id) + '_' + self.customer.fullname.firstName
+        #return str(self.id) + '_' + self.customer.fullname.firstName
+        return str(self.pk) + '_' + self.customer.fullname.firstName
     @property
     def shipPrice(self):
         return 1.0

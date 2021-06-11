@@ -109,6 +109,54 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="not-boostrap-box-element" id="form-wrapper">
+                <input id="typePay1" name="groupPay" type="radio" value="payNhan">
+                <label for="typePay1">Trả khi nhận hàng</label>
+                <br>
+                <input id="typePay2" name="groupPay" type="radio" value="paypal" checked>
+                <label for="typePay2">Pay with credit card</label>
+                <br>
+                <form id="myform2" action="{% url 'name_processNhan' %}" class="not-bootstrap-hidden" method="POST">
+
+                    {% csrf_token %}
+
+                    <div id="user-info2">
+                        <hr>
+                        <p>Customer name:</p>
+                        <hr>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-first-name" placeholder="Your first name" value="{{customer.fullname.firstName}}" required >
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-mid-name" placeholder="Your middle name" value="{{customer.fullname.midName}}" required >
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-last-name" placeholder="Your last name" value="{{customer.fullname.lastName}}" required >
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="shipping-info2">
+                        <hr>
+                        <p>Shipping Information:</p>
+                        <hr>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-city" placeholder="Your city" value="{{customer.address.city}}" required >
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-district" placeholder="Your district" value="{{customer.address.district}}" required >
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-street" placeholder="Your street" value="{{customer.address.street}}" required >
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-house-number" placeholder="Your house number" value="{{customer.address.houseNum}}" required >
+                        </div>
+                        <div class="not-bootstrap-form-field">
+                            <input class="form-control" type="text" name="my-phone" placeholder="Your phone number" value="{{customer.phone}}" required >
+                        </div>
+                    </div>
+                    <hr>
+                    <input id="my-form-button2" class="btn btn-success btn-block" type="submit" value="Confirm Order">
+                </form>
                 <form id="myform">
 
                     {% csrf_token %}
@@ -118,13 +166,13 @@
                         <p>Customer name:</p>
                         <hr>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-first-name" placeholder="Your first name" value="{{customer.fullname.firstName}}" required disabled>
+                            <input class="form-control" type="text" name="my-first-name" placeholder="Your first name" value="{{customer.fullname.firstName}}" required >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-mid-name" placeholder="Your middle name" value="{{customer.fullname.midName}}" required disabled>
+                            <input class="form-control" type="text" name="my-mid-name" placeholder="Your middle name" value="{{customer.fullname.midName}}" required >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-last-name" placeholder="Your last name" value="{{customer.fullname.lastName}}" required disabled>
+                            <input class="form-control" type="text" name="my-last-name" placeholder="Your last name" value="{{customer.fullname.lastName}}" required >
                         </div>
                     </div>
                     <hr>
@@ -133,23 +181,23 @@
                         <p>Shipping Information:</p>
                         <hr>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-city" placeholder="Your city" value="{{customer.address.city}}" required disabled>
+                            <input class="form-control" type="text" name="my-city" placeholder="Your city" value="{{customer.address.city}}" required >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-district" placeholder="Your district" value="{{customer.address.district}}" required disabled>
+                            <input class="form-control" type="text" name="my-district" placeholder="Your district" value="{{customer.address.district}}" required >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-street" placeholder="Your street" value="{{customer.address.street}}" required disabled>
+                            <input class="form-control" type="text" name="my-street" placeholder="Your street" value="{{customer.address.street}}" required >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-house-number" placeholder="Your house number" value="{{customer.address.houseNum}}" required disabled>
+                            <input class="form-control" type="text" name="my-house-number" placeholder="Your house number" value="{{customer.address.houseNum}}" required >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-phone" placeholder="Your phone number" value="{{customer.phone}}" required disabled>
+                            <input class="form-control" type="text" name="my-phone" placeholder="Your phone number" value="{{customer.phone}}" required >
                         </div>
                     </div>
                     <hr>
-                    <input id="my-form-button" class="btn btn-success btn-block" type="submit" value="Confirm Order">
+                    <input id="my-form-button" class="btn btn-success btn-block" type="submit" value="Pay with credit card">
                 </form>
             </div>
             <br>
@@ -343,6 +391,19 @@ function initMap() {
     }).render('#paypal-button-container');
 </script>
 
+    <script type="text/javascript">
+        var typePay1 = document.getElementById('typePay1');
+        typePay1.addEventListener('click', function(){
+            document.getElementById('myform2').classList.remove('not-bootstrap-hidden')
+            document.getElementById('myform').classList.add('not-bootstrap-hidden')
+        });
+        var typePay2 = document.getElementById('typePay2');
+        typePay2.addEventListener('click', function(){
+            document.getElementById('myform').classList.remove('not-bootstrap-hidden')
+            document.getElementById('myform2').classList.add('not-bootstrap-hidden')
+        });
+    </script>
+
 <script type="text/javascript">
     var form = document.getElementById('myform')
     form.addEventListener('submit', function(e){
@@ -359,11 +420,12 @@ function initMap() {
             'my-first-name':document.querySelector('input[name=my-first-name]').value,
             'my-mid-name': document.querySelector('input[name=my-mid-name]').value,
             'my-last-name':document.querySelector('input[name=my-last-name]').value,
-            'my-city': document.querySelector('input[name=my-city]'),
-            'my-district': document.querySelector('input[name=my-district]'),
-            'my-street': document.querySelector('input[name=my-street]'),
-            'my-house-number': document.querySelector('input[name=my-house-number]'),
-            'my-phone':document.querySelector('input[name=my-phone]').value
+            'my-city': document.querySelector('input[name=my-city]').value,
+            'my-district': document.querySelector('input[name=my-district]').value,
+            'my-street': document.querySelector('input[name=my-street]').value,
+            'my-house-number': document.querySelector('input[name=my-house-number]').value,
+            'my-phone': document.querySelector('input[name=my-phone]').value,
+            'type_pay': 'paypal'
         }
 
         var url = '/processOrder/'

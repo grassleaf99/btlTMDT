@@ -10,6 +10,8 @@ urlpatterns = [
     path('logout/', views.Logout.as_view(), name='name_out'),
     path('updateItem/', views.updateItem, name='name_updateitem'),
     path('processOrder/', views.processOrder, name='name_processOder'),
+    path('processNhan/', views.processNhan, name='name_processNhan'),
+    path('allOrders/', views.ViewAllOrders.as_view(), name='name_allorders'),
     path('bua/', views.bua, name='bua'),
 ]
 
@@ -18,3 +20,4 @@ urlpatterns = [
 # tai khoan 3: test3 test3
 # tai khoan 4: test4 test4
 # ...
+# tai khoan employee sale: sale SaleStaff
