@@ -123,13 +123,13 @@
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                     <div class="text-bg">
                      <span>Welcome {{request.user.username}} to Shree</span>
-                      <h1>Vegetables Shop</h1>
+                      <h1>BoEC Shop</h1>
                       <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal </p>
                       <form class="Vegetable">
-                <input class="Vegetable_fom" placeholder="Vegetable" type="text" name=" Vegetable">
+                <input class="Vegetable_fom" placeholder="Book, Electronic, Clothes" type="text" name=" Vegetable">
                 <button class="Search_btn">Search</button>
               </form>
-                      <a href="#">Contact Us</a> <a href="#">Vegetable</a>
+                      <a href="#">Contact Us</a> <a href="#">BoEC</a>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -150,13 +150,13 @@
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                     <div class="text-bg">
                       <span>Welcome {{request.user.username}} to Shree</span>
-                      <h1>Vegetables Shop</h1>
+                      <h1>BoEC Shop</h1>
                       <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal </p>
                       <form class="Vegetable">
-                <input class="Vegetable_fom" placeholder="Vegetable" type="text" name=" Vegetable">
+                <input class="Vegetable_fom" placeholder="Book, Electronic, Clothes" type="text" name=" Vegetable">
                 <button class="Search_btn">Search</button>
               </form>
-                      <a href="#">Contact Us</a> <a href="#">Vegetable</a>
+                      <a href="#">Contact Us</a> <a href="#">BoEC</a>
                     </div>
                   </div>
 
@@ -180,13 +180,13 @@
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                     <div class="text-bg">
                       <span>Welcome {{request.user.username}} to Shree</span>
-                      <h1>Vegetables Shop</h1>
+                      <h1>BoEC Shop</h1>
                       <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal </p>
                        <form class="Vegetable">
-                <input class="Vegetable_fom" placeholder="Vegetable" type="text" name=" Vegetable">
+                <input class="Vegetable_fom" placeholder="Book, Electronic, Clothes" type="text" name=" Vegetable">
                 <button class="Search_btn">Search</button>
               </form>
-                      <a href="#">Contact Us</a> <a href="#">Vegetable</a>
+                      <a href="#">Contact Us</a> <a href="#">BoEC</a>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -221,9 +221,15 @@
   </div>
   <!-- end loader -->
 
+    {% for message in messages %}
+        <div class="order-success">
+            <h1>{{message}}</h1>
+        </div>
+    {% endfor %}
+
     <!-- load danh sach rau cu-->
     <section id="list-vegetable-section">
-        <h1 class="head-list-vegetable">ALL VEGETABLES:</h1>
+        <h1 class="head-list-vegetable">ALL ITEMS:</h1>
         <hr>
         <h2 class="text-center"><strong>Cart quantity: {{cart.get_cart_quantity}}</strong></h2>
         <hr>

@@ -252,6 +252,7 @@ def processNhan(request):
     order.payment = payNhan
     order.save()
     print('Order successfully')
+    messages.info(request, 'Order successfully')
     return redirect('name_home')
 
 class ViewAllOrders(LoginRequiredMixin, View):
