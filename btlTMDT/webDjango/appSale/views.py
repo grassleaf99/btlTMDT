@@ -76,7 +76,7 @@ class Login(View):
             if Employee.objects.filter(user=user).exists():
                 employee = Employee.objects.get(user=user)
                 if SaleStaff.objects.filter(employee=employee).exists():
-                    return redirect('')
+                    return redirect('name_em_home')
             return redirect('name_home')
         else:
             messages.info(request, 'Invalid credentials')
@@ -95,6 +95,13 @@ class HomeAfterLoginView(LoginRequiredMixin, View):
         context = {'categories':categories, 'cart':cart}
         #context = {'items':items, 'cart':cart}
         return render(request, 'home.html', context)
+
+class EmAfterLoginView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request):
+        salestaff = request.user.employee.salestaff
+        return render(request, 'emHome.html')
 
 class ViewCart(LoginRequiredMixin, View):
     login_url = '/login/'
@@ -259,8 +266,44 @@ class ViewAllOrders(LoginRequiredMixin, View):
     login_url = '/login/'
 
     def get(self, request):
-        if request.user.employee.salestaff:
-            pass
+        user = request.user
+        if Employee.objects.filter(user=user).exists():
+            employee = Employee.objects.get(user=user)
+            if SaleStaff.objects.filter(employee=employee).exists():
+                completedOrders = Order.objects.filter(complete=True, confirmOrder=False)
+                context = {'orders': completedOrders}
+                return render(request, 'allorders.html', context)
+        customer = user.customer
+        confirmedOrders = Order.objects.filter(customer=customer, complete=True, confirmOrder=True)
+        context = {'orders': confirmedOrders}
+        return render(request, 'allCCorders.html', context)
+
+class DetailOrder(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request, order_id):
+        user = request.user
+        order = Order.objects.get(pk=order_id)
+        context = {'order': order}
+        if Employee.objects.filter(user=user).exists():
+            employee = Employee.objects.get(user=user)
+            if SaleStaff.objects.filter(employee=employee).exists():
+                return render(request, 'confirmOrder.html', context)
+        return render(request, 'detailOrder.html', context)
+
+
+class ConfirmOrder(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def post(self, request):
+        # du input voi name order-id nhan du lieu la number nhung sau do khi lay ve tu request.POST thi du lieu lai la kieu xau (str) nen can chuyen sang kieu int
+        orderID = int(request.POST['order-id'])
+        order = Order.objects.get(pk=orderID)
+        order.saleStaff = request.user.employee.salestaff
+        order.confirmOrder = True
+        order.save()
+        messages.info(request, 'Order with ID ' + str(orderID) + ' has been confirmed')
+        return redirect('name_em_home')
 
 def bua(request):
     return render(request, 'homepage/base.html')

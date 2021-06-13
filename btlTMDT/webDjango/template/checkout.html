@@ -88,6 +88,7 @@
                     <ul class="menu-area-main">
                       <li class="active"> <a href="{% url 'name_home' %}">Home</a> </li>
                         <li> <a href="/cart/">Cart</a> </li>
+                        <li> <a href="{% url 'name_allorders' %}">Confirmed Orders</a> </li>
                       <li> <a href="#about">About</a> </li>
                       <li> <a href="#contact">Contact Us</a> </li>
                         <li> <a href="/logout/">Log out</a> </li>
@@ -231,28 +232,6 @@
         </div>
     </div>
     <!--end checkout-->
-
-<!-- about  -->
-<div id="about" class="about">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-        <div class="about-box">
-          <h2>About us</h2>
-          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages andIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many</p>
-          <a href="Javascript:void(0)">Read more</a>
-        </div>
-      </div>
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 padding_rl">
-        <div class="about-box_img">
-          <figure><img src="{% static 'homepage/images/about.jpg' %}" alt="#" /></figure>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-<!-- end abouts -->
 
 <!-- contact -->
 <div id="contact" class="contact">
