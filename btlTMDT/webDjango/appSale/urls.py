@@ -5,6 +5,7 @@ urlpatterns = [
     path('register/', views.Register.as_view(), name='name_register'),
     path('login/', views.Login.as_view(), name='name_login'),
     path('home/', views.HomeAfterLoginView.as_view(), name='name_home'),
+    path('search/', views.SearchResult.as_view(), name='name_search'),
     path('emHome/', views.EmAfterLoginView.as_view(), name='name_em_home'),
     path('cart/', views.ViewCart.as_view(), name='name_cart'),
     path('checkout/', views.ViewCheckout.as_view(), name='name_checkout'),

@@ -96,6 +96,16 @@ class HomeAfterLoginView(LoginRequiredMixin, View):
         #context = {'items':items, 'cart':cart}
         return render(request, 'home.html', context)
 
+class SearchResult(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def post(self, request):
+        rex = request.POST['BoEC']
+        items = Item.objects.filter(name__contains=rex)
+        context = {'items':items, 'rex':rex}
+        return render(request, 'search.html', context)
+
+
 class EmAfterLoginView(LoginRequiredMixin, View):
     login_url = '/login/'
 
