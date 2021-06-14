@@ -299,7 +299,6 @@ class DetailOrder(LoginRequiredMixin, View):
             employee = Employee.objects.get(user=user)
             if SaleStaff.objects.filter(employee=employee).exists():
                 return render(request, 'confirmOrder.html', context)
-        return render(request, 'detailOrder.html', context)
 
 
 class ConfirmOrder(LoginRequiredMixin, View):
@@ -314,6 +313,34 @@ class ConfirmOrder(LoginRequiredMixin, View):
         order.save()
         messages.info(request, 'Order with ID ' + str(orderID) + ' has been confirmed')
         return redirect('name_em_home')
+
+class CreateUpdateComment(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request, order_id):
+        order = Order.objects.get(pk=order_id)
+        comment, created = Comment.objects.get_or_create(order=order)
+        context = {'comment':comment}
+        return render(request, 'cuComment.html', context)
+
+class PostCommentView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def post(self, request):
+        commentID = int(request.POST['comment-id'])
+        comment = Comment.objects.get(pk=commentID)
+        comment.content = request.POST['content']
+        comment.save()
+        return redirect('name_allcomment')
+
+class AllCommentView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request):
+        customer = request.user.customer
+        orders = Order.objects.filter(customer=customer)
+        context = {'orders':orders}
+        return render(request, 'allcomments.html', context)
 
 def bua(request):
     return render(request, 'homepage/base.html')

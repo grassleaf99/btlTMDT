@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>Confirmed Orders</title>
+  <title>All Comments</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -86,26 +86,20 @@
         <table class="table table-striped table-hover">
             <thead class="table-success">
                 <tr>
+                    <th scope="col">Comment ID</th>
                     <th scope="col">Order ID</th>
-                    <th scope="col">ItemCart</th>
-                    <th scope="col">Payment</th>
-                    <th scope="col">Comment</th>
+                    <th scope="col">Content</th>
                 </tr>
             </thead>
             <tbody>
                 {% for order in orders %}
-                    <tr>
-                        <th scope="row">{{order.id}}</th>
-                        <td>
-                            <ul>
-                                {% for itemcart in order.cart.itemcart_set.all %}
-                                    <li>{{itemcart.item.name}} - {{itemcart.quantity}}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                        <td>{{order.payment.name}}</td>
-                        <td><a class="btn btn-success" href="{% url 'name_cucomment' order.id %}">Comment</a></td>
-                    </tr>
+                    {% if order.comment %}
+                        <tr>
+                            <th scope="row">{{order.comment.id}}</th>
+                            <td>{{order.id}}</td>
+                            <td>{{order.comment.content}}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>

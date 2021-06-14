@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>Confirmed Orders</title>
+  <title>Create Update Comment</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -81,34 +81,16 @@
      <!-- end header inner -->
 </header>
 
-    <!-- Hien thi thong tin cac don hang da duoc confirm boi nhan vien ban hang -->
-    <div class="container my-5">
-        <table class="table table-striped table-hover">
-            <thead class="table-success">
-                <tr>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">ItemCart</th>
-                    <th scope="col">Payment</th>
-                    <th scope="col">Comment</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order in orders %}
-                    <tr>
-                        <th scope="row">{{order.id}}</th>
-                        <td>
-                            <ul>
-                                {% for itemcart in order.cart.itemcart_set.all %}
-                                    <li>{{itemcart.item.name}} - {{itemcart.quantity}}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                        <td>{{order.payment.name}}</td>
-                        <td><a class="btn btn-success" href="{% url 'name_cucomment' order.id %}">Comment</a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <!-- Hien thi form nhap hay sua comment -->
+    <div class="container my-5 text-center">
+        <form method="post" action="{% url 'name_postcomment' %}">
+            {% csrf_token %}
+            <input type="number" style="display:none;" value="{{comment.id}}" name="comment-id">
+            <br>
+            <textarea name="content" placeholder="Type your comment" rows="10" cols="70">{{comment.content}}</textarea>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
     </div>
     <!-- Het hien thi thong tin cac don hang da duoc confirm boi nhan vien ban hang -->
 

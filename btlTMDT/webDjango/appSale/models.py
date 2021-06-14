@@ -140,3 +140,19 @@ class ItemCart(models.Model):
     def get_itemcart_price(self):
         itemcartPrice = self.item.price * self.quantity
         return itemcartPrice
+
+
+class Comment(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, null=False, blank=False)
+    content = models.CharField(max_length=255, null=True, blank=True, default='')
+    def __str__(self):
+        return str(self.id) + '_order' + str(self.order.id)
+
+class Reply(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=False, blank=False)
+    saleStaff = models.ForeignKey(SaleStaff, on_delete=models.CASCADE, blank=False, null=False)
+    content = models.CharField(max_length=255, null=True, blank=True, default='')
+    def __str__(self):
+        return str(self.id) + '_comment' + str(self.comment.id) + 'by' + self.saleStaff.employee.user.username
+
+

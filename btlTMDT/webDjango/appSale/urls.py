@@ -16,6 +16,9 @@ urlpatterns = [
     path('allOrders/', views.ViewAllOrders.as_view(), name='name_allorders'),
     path('detailOrder/<int:order_id>', views.DetailOrder.as_view(), name='name_dtOd'),
     path('confirmOrder/', views.ConfirmOrder.as_view(), name='name_cfOd'),
+    path('cuComment/<int:order_id>', views.CreateUpdateComment.as_view(), name='name_cucomment'),
+    path('postComment/', views.PostCommentView.as_view(), name='name_postcomment'),
+    path('allComments/', views.AllCommentView.as_view(), name='name_allcomment'),
     path('bua/', views.bua, name='bua'),
 ]
 
