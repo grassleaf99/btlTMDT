@@ -19,6 +19,10 @@ urlpatterns = [
     path('cuComment/<int:order_id>', views.CreateUpdateComment.as_view(), name='name_cucomment'),
     path('postComment/', views.PostCommentView.as_view(), name='name_postcomment'),
     path('allComments/', views.AllCommentView.as_view(), name='name_allcomment'),
+    path('cuReply/<int:comment_id>', views.CreateUpdateReply.as_view(), name='name_cuReply'),
+    path('postReply/', views.PostReplyView.as_view(), name='name_postreply'),
+    path('allReplies/', views.AllReplyView.as_view(), name='name_allreply'),
+    path('dtReplies/<int:comment_id>', views.RepliesOfComment.as_view(), name='name_dtRp'),
     path('bua/', views.bua, name='bua'),
 ]
 

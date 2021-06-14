@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>Create Update Comment</title>
+  <title>Replies of Comment</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -81,18 +81,32 @@
      <!-- end header inner -->
 </header>
 
-    <!-- Hien thi form nhap hay sua comment -->
-    <div class="container my-5 text-center">
-        <form method="post" action="{% url 'name_postcomment' %}">
-            {% csrf_token %}
-            <input type="number" style="display:none;" value="{{comment.id}}" name="comment-id">
-            <br>
-            <textarea name="content" placeholder="Type your comment" rows="10" cols="70">{{comment.content}}</textarea>
-            <br>
-            <input class="btn btn-primary" type="submit" value="Submit">
-        </form>
+    <!-- Hien thi tat ca reply cua comment duoc chon -->
+    <div class="container my-5">
+        {% if replies %}
+            <table class="table table-striped table-hover">
+                <thead class="table-success">
+                    <tr>
+                        <th scope="col">Reply ID</th>
+                        <th scope="col">Staff name</th>
+                        <th scope="col">Content</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reply in replies %}
+                        <tr>
+                            <th scope="row">{{reply.id}}</th>
+                            <td>{{reply.saleStaff.employee.user.username}}</td>
+                            <td>{{reply.content}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h2 class="text-center">Bình luận này chưa có phản hồi nào</h2>
+        {% endif %}
     </div>
-    <!-- Het hien thi form nhap hay sua comment -->
+    <!-- Het hien thi tat ca reply cua comment duoc chon -->
 
 <!-- contact -->
 <div id="contact" class="contact">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <title>Process Order</title>
+    <title>Choose Comment</title>
 </head>
 <body class="bg-primary">
     <!--navbar-->
@@ -16,30 +16,30 @@
         </div>
     </div>
     <!--navbar-->
-    <!-- Hien thi thong tin cac don hang chua duoc confirm boi nhan vien ban hang -->
+    <!-- Hien thi tat ca comment  -->
     <div class="container my-5">
         <table class="table table-striped table-hover bg-light">
             <thead class="table-success">
                 <tr>
-                    <th scope="col">Order ID</th>
+                    <th scope="col">Comment ID</th>
                     <th scope="col">Customer name</th>
-                    <th scope="col">Order Date</th>
-                    <th scope="col">View detail</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Reply</th>
                 </tr>
             </thead>
             <tbody>
-                {% for order in orders %}
+                {% for comment in comments %}
                     <tr>
-                        <th scope="row">{{order.id}}</th>
-                        <td>{{order.customer.fullname.firstName}}</td>
-                        <td>{{order.date_order}}</td>
-                        <td><a class="btn btn-info" style="color: white" href="{% url 'name_dtOd' order.id %}">Go to detail</a></td>
+                        <th scope="row">{{comment.id}}</th>
+                        <td>{{comment.order.customer.fullname.firstName}}</td>
+                        <td>{{comment.content}}</td>
+                        <td><a class="btn btn-info" style="color: white" href="{% url 'name_cuReply' comment.id %}">Reply comment</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    <!-- Het hien thi thong tin cac don hang chua duoc confirm boi nhan vien ban hang -->
+    <!-- Het hien thi thong tin cac don hang da duoc confirm boi nhan vien ban hang -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>

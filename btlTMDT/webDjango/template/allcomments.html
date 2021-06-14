@@ -81,7 +81,7 @@
      <!-- end header inner -->
 </header>
 
-    <!-- Hien thi thong tin cac don hang da duoc confirm boi nhan vien ban hang -->
+    <!-- Hien thi tat ca comment cua customer nay -->
     <div class="container my-5">
         <table class="table table-striped table-hover">
             <thead class="table-success">
@@ -89,6 +89,7 @@
                     <th scope="col">Comment ID</th>
                     <th scope="col">Order ID</th>
                     <th scope="col">Content</th>
+                    <th scope="col">Replies</th>
                 </tr>
             </thead>
             <tbody>
@@ -98,13 +99,14 @@
                             <th scope="row">{{order.comment.id}}</th>
                             <td>{{order.id}}</td>
                             <td>{{order.comment.content}}</td>
+                            <td><a class="btn btn-info" style="color: white" href="{% url 'name_dtRp' order.comment.id %}">Go to replies</a></td>
                         </tr>
                     {% endif %}
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    <!-- Het hien thi thong tin cac don hang da duoc confirm boi nhan vien ban hang -->
+    <!-- Het hien thi tat ca comment cua customer nay -->
 
 <!-- contact -->
 <div id="contact" class="contact">

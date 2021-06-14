@@ -337,10 +337,59 @@ class AllCommentView(LoginRequiredMixin, View):
     login_url = '/login/'
 
     def get(self, request):
-        customer = request.user.customer
+        user = request.user
+        if Employee.objects.filter(user=user).exists():
+            employee = Employee.objects.get(user=user)
+            if SaleStaff.objects.filter(employee=employee).exists():
+                comments = Comment.objects.all()
+                context = {'comments':comments}
+                return render(request, 'chooseComment.html', context)
+        customer = user.customer
         orders = Order.objects.filter(customer=customer)
         context = {'orders':orders}
         return render(request, 'allcomments.html', context)
+
+class CreateUpdateReply(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request, comment_id):
+        saleStaff = request.user.employee.salestaff
+        comment = Comment.objects.get(pk=comment_id)
+        reply, created = Reply.objects.get_or_create(comment=comment, saleStaff=saleStaff)
+        context = {'reply': reply}
+        return render(request, 'cuReply.html', context)
+
+class PostReplyView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def post(self, request):
+        replyID = int(request.POST['reply-id'])
+        reply = Reply.objects.get(pk=replyID)
+        reply.content = request.POST['content']
+        reply.save()
+        return redirect('name_allreply')
+
+class AllReplyView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request):
+        user = request.user
+        if Employee.objects.filter(user=user).exists():
+            employee = Employee.objects.get(user=user)
+            if SaleStaff.objects.filter(employee=employee).exists():
+                saleStaff = SaleStaff.objects.get(employee=employee)
+                replies = Reply.objects.filter(saleStaff=saleStaff)
+                context = {'replies': replies}
+                return render(request, 'allreply.html', context)
+
+class RepliesOfComment(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request, comment_id):
+        comment = Comment.objects.get(pk=comment_id)
+        replies= Reply.objects.filter(comment=comment)
+        context = {'replies':replies}
+        return render(request, 'dtReplies.html', context)
 
 def bua(request):
     return render(request, 'homepage/base.html')
