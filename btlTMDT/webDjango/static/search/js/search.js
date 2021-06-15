@@ -44,5 +44,6 @@ function updateCart(itemId, action)
     .then((data) =>{
         console.log('data: ', data)
         alert('Update cart successfully')
+        window.location.assign('/home/')
     })
 }
