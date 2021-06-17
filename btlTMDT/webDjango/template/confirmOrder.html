@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        #cO {
+            display: none;
+        }
+    </style>
     <title>Confirm Order</title>
 </head>
 <body class="bg-info">
@@ -47,7 +52,7 @@
         <h4 class="my-2" style="text-align: end;">Total: {{order.totalOrderPrice}}</h4>
         <form method="post" action="{% url 'name_cfOd' %}">
             {% csrf_token %}
-            <input type="number" style="display: none;" name="order-id" value="{{order.id}}">
+            <input id="cO" type="number" name="order-id" value="{{order.id}}">
             <div style="text-align: center;" class="py-2">
                 <button class="btn btn-success" type="submit">Confirm Order</button>
             </div>

@@ -29,12 +29,14 @@
             </thead>
             <tbody>
                 {% for reply in replies %}
-                    <tr>
-                        <th scope="row">{{reply.id}}</th>
-                        <td>{{reply.comment.order.customer.fullname.firstName}}</td>
-                        <td>{{reply.comment.content}}</td>
-                        <td>{{reply.content}}</td>
-                    </tr>
+                    {% if reply.content != '' %}
+                        <tr>
+                            <th scope="row">{{reply.id}}</th>
+                            <td>{{reply.comment.order.customer.fullname.firstName}}</td>
+                            <td>{{reply.comment.content}}</td>
+                            <td>{{reply.content}}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>

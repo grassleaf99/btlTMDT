@@ -95,12 +95,14 @@
             <tbody>
                 {% for order in orders %}
                     {% if order.comment %}
-                        <tr>
-                            <th scope="row">{{order.comment.id}}</th>
-                            <td>{{order.id}}</td>
-                            <td>{{order.comment.content}}</td>
-                            <td><a class="btn btn-info" style="color: white" href="{% url 'name_dtRp' order.comment.id %}">Go to replies</a></td>
-                        </tr>
+                        {% if order.comment.content != '' %}
+                            <tr>
+                                <th scope="row">{{order.comment.id}}</th>
+                                <td>{{order.id}}</td>
+                                <td>{{order.comment.content}}</td>
+                                <td><a class="btn btn-info" style="color: white" href="{% url 'name_dtRp' order.comment.id %}">Go to replies</a></td>
+                            </tr>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </tbody>

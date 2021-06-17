@@ -167,13 +167,13 @@
                         <p>Customer name:</p>
                         <hr>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-first-name" placeholder="Your first name" value="{{customer.fullname.firstName}}" required >
+                            <input class="form-control" type="text" name="my-first-name" placeholder="Your first name" value="{{customer.fullname.firstName}}" disabled >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-mid-name" placeholder="Your middle name" value="{{customer.fullname.midName}}" required >
+                            <input class="form-control" type="text" name="my-mid-name" placeholder="Your middle name" value="{{customer.fullname.midName}}" disabled >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-last-name" placeholder="Your last name" value="{{customer.fullname.lastName}}" required >
+                            <input class="form-control" type="text" name="my-last-name" placeholder="Your last name" value="{{customer.fullname.lastName}}" disabled >
                         </div>
                     </div>
                     <hr>
@@ -182,30 +182,28 @@
                         <p>Shipping Information:</p>
                         <hr>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-city" placeholder="Your city" value="{{customer.address.city}}" required >
+                            <input class="form-control" type="text" name="my-city" placeholder="Your city" value="{{customer.address.city}}" disabled >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-district" placeholder="Your district" value="{{customer.address.district}}" required >
+                            <input class="form-control" type="text" name="my-district" placeholder="Your district" value="{{customer.address.district}}" disabled >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-street" placeholder="Your street" value="{{customer.address.street}}" required >
+                            <input class="form-control" type="text" name="my-street" placeholder="Your street" value="{{customer.address.street}}" disabled >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-house-number" placeholder="Your house number" value="{{customer.address.houseNum}}" required >
+                            <input class="form-control" type="text" name="my-house-number" placeholder="Your house number" value="{{customer.address.houseNum}}" disabled >
                         </div>
                         <div class="not-bootstrap-form-field">
-                            <input class="form-control" type="text" name="my-phone" placeholder="Your phone number" value="{{customer.phone}}" required >
+                            <input class="form-control" type="text" name="my-phone" placeholder="Your phone number" value="{{customer.phone}}" disabled >
                         </div>
                     </div>
                     <hr>
-                    <input id="my-form-button" class="btn btn-success btn-block" type="submit" value="Pay with credit card">
+                    <div class="not-boostrap-box-element" id="my-payment">
+                        <small>Paypal Option</small>
+                        <!-- Set up a container element for the button -->
+                        <div id="paypal-button-container"></div>
+                    </div>
                 </form>
-            </div>
-            <br>
-            <div class="not-boostrap-box-element not-bootstrap-hidden" id="my-payment">
-                <small>Paypal Option</small>
-                <!-- Set up a container element for the button -->
-                <div id="paypal-button-container"></div>
             </div>
         </div>
 
@@ -384,13 +382,6 @@ function initMap() {
     </script>
 
 <script type="text/javascript">
-    var form = document.getElementById('myform')
-    form.addEventListener('submit', function(e){
-        e.preventDefault()
-        console.log('Form submitted...')
-        document.getElementById('my-form-button').classList.add('not-bootstrap-hidden')
-        document.getElementById('my-payment').classList.remove('not-bootstrap-hidden')
-    })
     function submitOrderData()
     {
         console.log('Payment button clicked...')

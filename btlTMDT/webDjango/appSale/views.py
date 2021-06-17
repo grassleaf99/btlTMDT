@@ -194,30 +194,6 @@ def processOrder(request):
     print(phone)
     print(totalPrice)
     print(pay)
-    if fullname.firstName != first_name:
-        fullname.firstName = first_name
-        fullname.save()
-    if fullname.midName != mid_name:
-        fullname.midName = mid_name
-        fullname.save()
-    if fullname.lastName != last_name:
-        fullname.lastName = last_name
-        fullname.save()
-    if address.city != city:
-        address.city = city
-        address.save()
-    if address.district != district:
-        address.district = district
-        address.save()
-    if address.street != street:
-        address.street = street
-        address.save()
-    if address.houseNum != houseNum:
-        address.houseNum = houseNum
-        address.save()
-    if customer.phone != phone:
-        customer.phone = phone
-        customer.save()
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     if totalPrice == order.totalOrderPrice:  # kiem tra user co gian lan bang cach thay doi tong tien cua cart ko
         order.complete = True

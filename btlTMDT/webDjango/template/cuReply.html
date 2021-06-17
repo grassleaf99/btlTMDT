@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        #cuR {
+            display:none;
+        }
+    </style>
     <title>Create Update Reply</title>
 </head>
 <body class="bg-secondary">
@@ -20,7 +25,7 @@
     <div class="container my-5 text-center">
         <form method="post" action="{% url 'name_postreply' %}">
             {% csrf_token %}
-            <input type="number" style="display:none;" value="{{reply.id}}" name="reply-id">
+            <input id="cuR" type="number" value="{{reply.id}}" name="reply-id">
             <br>
             <textarea name="content" placeholder="Type your reply" rows="10" cols="70">{{reply.content}}</textarea>
             <br>

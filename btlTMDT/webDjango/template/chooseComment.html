@@ -29,12 +29,14 @@
             </thead>
             <tbody>
                 {% for comment in comments %}
-                    <tr>
-                        <th scope="row">{{comment.id}}</th>
-                        <td>{{comment.order.customer.fullname.firstName}}</td>
-                        <td>{{comment.content}}</td>
-                        <td><a class="btn btn-info" style="color: white" href="{% url 'name_cuReply' comment.id %}">Reply comment</a></td>
-                    </tr>
+                    {% if comment.content != '' %}
+                        <tr>
+                            <th scope="row">{{comment.id}}</th>
+                            <td>{{comment.order.customer.fullname.firstName}}</td>
+                            <td>{{comment.content}}</td>
+                            <td><a class="btn btn-info" style="color: white" href="{% url 'name_cuReply' comment.id %}">Reply comment</a></td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
